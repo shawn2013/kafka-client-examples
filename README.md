@@ -23,16 +23,16 @@ Kafka client 原生API使用示例
 # 验证消息发布、消费
 ## 创建Topic并查询
 ```
-bin/kafka-topics.sh --zookeeper localhost:2181 --create --topic my_topic --partitions 3 --replication-factor 1
-bin/kafka-topics.sh --list --zookeeper localhost:2181 
+> bin/kafka-topics.sh --zookeeper localhost:2181 --create --topic my_topic --partitions 3 --replication-factor 1
+> bin/kafka-topics.sh --list --zookeeper localhost:2181 
 ```
 注：kafka 2.2.x版本及以上，执行如上命令时，建议用'--bootstrap-server localhost:9092'替代'--zookeeper localhost:2181'
 
 ## 发布消息
 ```
-bin/kafka-console-producer.sh --broker-list localhost:9092--topic my_topic
+> bin/kafka-console-producer.sh --broker-list localhost:9092--topic my_topic
 ```
 ## 消费消息
 ```
-bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic my_topic --from-beginning
+> bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic my_topic --from-beginning
 ```
