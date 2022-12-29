@@ -1,4 +1,4 @@
-package com.demo.simple;
+package com.demo.asynchronous;
 
 import com.demo.common.PropertiesUtil;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -8,12 +8,12 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import java.util.Arrays;
 import java.util.Properties;
 
-public class SimpleConsumer {
+public class MyConsumer {
 
     public static void main(String[] args) throws Exception {
 
-        String topicName = "SimpleProducerTopic";
-        String groupName = "SimpleTopicGroup";
+        String topicName = "AsynchronousProducerTopic";
+        String groupName = "AsynchronousTopicGroup";
 
         Properties props = PropertiesUtil.getProperties();
         props.put("group.id", groupName);

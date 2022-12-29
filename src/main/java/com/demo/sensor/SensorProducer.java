@@ -1,7 +1,8 @@
-package com.demo.producer;
+package com.demo.sensor;
 
 import java.util.*;
 
+import com.demo.common.PropertiesUtil;
 import org.apache.kafka.clients.producer.*;
 
 public class SensorProducer {
@@ -10,11 +11,8 @@ public class SensorProducer {
 
         String topicName = "SensorTopic";
 
-        Properties props = new Properties();
-        props.put("bootstrap.servers", "localhost:9092,localhost:9093");
-        props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        props.put("partitioner.class", "com.demo.producer.SensorPartitioner");
+        Properties props = PropertiesUtil.getProperties();
+        props.put("partitioner.class", "com.demo.sensor.SensorPartitioner");
         props.put("speed.sensor.name", "TSS");
 
         Producer<String, String> producer = new KafkaProducer<>(props);
@@ -27,6 +25,6 @@ public class SensorProducer {
 
         producer.close();
 
-        System.out.println("com.demo.simple.SimpleProducer Completed.");
+        System.out.println("com.demo.sensor.SensorProducer Completed.");
     }
 }

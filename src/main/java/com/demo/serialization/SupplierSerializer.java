@@ -41,7 +41,6 @@ public class SupplierSerializer implements Serializer<Supplier> {
             buf.putInt(sizeOfDate);
             buf.put(serializedDate);
 
-
             return buf.array();
 
         } catch (Exception e) {
