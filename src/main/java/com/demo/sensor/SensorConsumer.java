@@ -10,6 +10,10 @@ import java.sql.*;
 
 public class SensorConsumer {
 
+    private static String url = "jdbc:mysql://localhost:3306/test";
+    private static String username = "root";
+    private static String password = "pandey";
+
 
     public static void main(String[] args) throws Exception {
 
@@ -58,9 +62,10 @@ public class SensorConsumer {
         long offset = 0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "pandey");
+            Connection con = DriverManager.getConnection(url, username, password);
 
-            String sql = "select offset from tss_offsets where topic_name='" + p.topic() + "' and partition=" + p.partition();
+            String sql = "select offset from tss_offsets where topic_name='"
+                    + p.topic() + "' and partition=" + p.partition();
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             if (rs.next())
@@ -74,10 +79,11 @@ public class SensorConsumer {
     }
 
     private static void saveAndCommit(KafkaConsumer<String, String> c, ConsumerRecord<String, String> r) {
-        System.out.println("Topic=" + r.topic() + " Partition=" + r.partition() + " Offset=" + r.offset() + " Key=" + r.key() + " Value=" + r.value());
+        System.out.println("Topic=" + r.topic() + " Partition=" + r.partition()
+                + " Offset=" + r.offset() + " Key=" + r.key() + " Value=" + r.value());
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "pandey");
+            Connection con = DriverManager.getConnection(url, username, password);
             con.setAutoCommit(false);
 
             String insertSQL = "insert into tss_data values(?,?)";
@@ -96,7 +102,7 @@ public class SensorConsumer {
             con.commit();
             con.close();
         } catch (Exception e) {
-            System.out.println("Exception in saveAndCommit");
+            e.printStackTrace();
         }
 
     }
