@@ -2,7 +2,7 @@ package com.demo.consumer;
 
 import java.util.*;
 
-import com.demo.producer.Supplier;
+import com.demo.serialization.Supplier;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -15,11 +15,12 @@ public class ManualConsumer{
         String groupName = "SupplierTopicGroup";
 
         Properties props = new Properties();
-        props.put("bootstrap.servers", "localhost:9092");
+        props.put("bootstrap.servers", "192.168.101.3:9092");
         props.put("group.id", groupName);
         props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("value.deserializer", "SupplierDeserializer");
         props.put("enable.auto.commit", "false");
+
 
         KafkaConsumer<String, Supplier> consumer = null;
 
